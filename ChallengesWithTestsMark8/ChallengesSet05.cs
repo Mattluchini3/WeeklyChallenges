@@ -7,63 +7,52 @@ namespace ChallengesWithTestsMark8
     {
         public int GetNextNumberDivisibleByN(int startNumber, int n)
         {
-            int output = ((startNumber / n) + 1) * n;
-            return output;
+            return ((startNumber / n) + 1) * n;
         }
 
         public void ChangeNamesOfBusinessesWithNoRevenueTo_CLOSED(Business[] businesses)
         {
-
-            for (var x = 0; x < businesses.Length; x++)
+            for (var i = 0; i < businesses.Length; i++)
             {
-                if (businesses[x].TotalRevenue == 0)
+                if (businesses[i].TotalRevenue == 0)
                 {
-                    businesses[x].Name = "CLOSED";
+                    businesses[i].Name = "CLOSED";
                 }
-
             }
         }
 
         public bool IsAscendingOrder(int[] numbers)
         {
-            if (numbers == null)
+            if (numbers == null || numbers.Length == 0)
             {
                 return false;
             }
-            if (numbers.Length == 0)
+            for (var i = 1; i < numbers.Length; i++)
             {
-                return false;
-            }
-            for (var x = 1; x < numbers.Length; x++)
-            {
-                if (numbers[x] < numbers[x - 1])
+                if (numbers[i] < numbers[i - 1])
                 {
                     return false;
                 }
             }
-
             return true;
         }
 
-    
-
-    public int SumElementsThatFollowAnEven(int[] numbers)
+        public int SumElementsThatFollowAnEven(int[] numbers)
         {
-            if (numbers == null)
+            if (numbers == null || numbers.Length == 0)
             {
                 return 0;
             }
 
-            var sum = 0;
+            int sum = 0;
 
-            for (var x = 1; x < numbers.Length; x++)
+            for (int i = 1; i < numbers.Length; i++)
             {
-                if (numbers[x - 1] % 2 == 0)
+                if (numbers[i - 1] % 2 == 0)
                 {
-                    sum += numbers[x];
+                    sum += numbers[i];
                 }
             }
-
             return sum;
         }
 
@@ -76,55 +65,50 @@ namespace ChallengesWithTestsMark8
 
             string sentence = "";
 
-            foreach (string word in words)
+            foreach (var word in words)
             {
                 if (word.Trim().Length > 0)
                 {
                     sentence += word.Trim() + " ";
                 }
             }
-
             if (sentence.Length == 0)
             {
                 return "";
             }
-
-            sentence = sentence.Substring(0, sentence.Length - 1);
+            sentence = sentence.Trim();
             sentence += ".";
             return sentence;
         }
 
         public double[] GetEveryFourthElement(List<double> elements)
         {
-            List<double> everyFourth = new List<double>();
-
-            if (elements == null)
+            if (elements == null || elements.Count == 0)
             {
-                return new double[] { };
+                return new double[0];
             }
+
+            List<double> result = new List<double>();
 
             for (int i = 3; i < elements.Count; i += 4)
             {
-                everyFourth.Add(elements[i]);
+                result.Add(elements[i]);
             }
-
-            return everyFourth.ToArray();
+            return result.ToArray();
         }
 
         public bool TwoDifferentElementsInArrayCanSumToTargetNumber(int[] nums, int targetNumber)
         {
-
             for (int i = 0; i < nums.Length; i++)
             {
-                for (int k = i + 1; k < nums.Length; k++)
+                for (int j = i + 1; j < nums.Length; j++)
                 {
-                    if (nums[i] + nums[k] == targetNumber)
+                    if (nums[i] + nums[j] == targetNumber)
                     {
                         return true;
                     }
                 }
             }
-
             return false;
         }
     }

@@ -8,110 +8,122 @@ namespace ChallengesWithTestsMark8
     {
         public bool CollectionContainsWord(IEnumerable<string> words, string word, bool ignoreCase)
         {
-            var contains = false;
+            bool containsWord = false;
+
             if (string.Equals(words, null) || words.Contains(null))
             {
                 return false;
             }
+
             if (ignoreCase == true)
             {
                 word = word.ToLower();
-                List<string> list = words.Select(x => x.ToLower()).ToList();
-                contains = list.Contains(word);
+
+                List<string> listLowerCase = words.Select(x => x.ToLower()).ToList();
+
+                containsWord = listLowerCase.Contains(word);
             }
-            if (words.Contains(word) && ignoreCase == false)
+
+            if (ignoreCase == false)
             {
-                contains = true;
+                containsWord = words.Contains(word);
             }
-
-            return contains;
-
+            return containsWord;
         }
 
         public bool IsPrimeNumber(int num)
         {
-            var isPrime = true;
+            var isPrime = false;
 
-            if (num <= 1)
+            if (num >= 0)
+            {
+                if (num % 2 != 0 && num % 3 != 0)
+                {
+                    isPrime = true;
+                }
+            }
+
+            if ((num == 2) || (num == 3))
+            {
+                isPrime = true;
+            }
+
+            if (num == 1)
             {
                 isPrime = false;
             }
-            else
-            {
-                for (int x = 2; x <= num / 2; x++)
-                {
-                    if (num % x == 0)
-                    {
-                        isPrime = false;
-                    }
-                }
-            }
+
             return isPrime;
         }
 
         public int IndexOfLastUniqueLetter(string str)
         {
             int index = -1;
-            bool uniqueIndex;
+            bool unidex;
 
             for (int i = 0; i < str.Length; i++)
             {
-                uniqueIndex = true;
+                unidex = true;
 
                 for (int j = 0; j < str.Length; j++)
                 {
                     if (str[i] == str[j] && i != j)
                     {
-                        uniqueIndex = false;
+                        unidex = false;
                     }
                 }
-                if (uniqueIndex == true)
+
+                if (unidex == true)
                 {
                     index = i;
                 }
             }
 
             return index;
-
         }
 
         public int MaxConsecutiveCount(int[] numbers)
         {
-            var count = 0;
+            int count = 0;
 
             for (var i = 0; i < numbers.Length; i++)
             {
-                int currentcount = 1;
+                int currentCount = 1;
 
                 for (var j = i + 1; j < numbers.Length; j++)
                 {
-                    if (numbers[j] != numbers[i])
+                    if (numbers[i] != numbers[j])
                     {
                         break;
                     }
 
-                    currentcount++;
+                    currentCount++;
                 }
-                if (currentcount > count)
+
+                if (currentCount > count)
                 {
-                    count = currentcount;
+                    count = currentCount;
                 }
             }
 
             return count;
-
         }
 
         public double[] GetEveryNthElement(List<double> elements, int n)
         {
-            double[] turn = new double[0];
-            if (elements == null || n < 0)
+            var nthElement = new List<double>();
+
+            if (elements == null || n <= 0 || n > elements.Count)
             {
-                return turn;
+                return nthElement.ToArray();
             }
 
-            return elements.Where((x, i) => x % n == 0).ToArray();
+            for (var i = n - 1; i < elements.Count; i += n)
+            {
+                nthElement.Add(elements[i]);
+            }
+
+            return nthElement.ToArray();
         }
     }
 }
-    
