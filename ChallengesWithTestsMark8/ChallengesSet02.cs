@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ChallengesWithTestsMark8
 {
@@ -36,7 +37,7 @@ namespace ChallengesWithTestsMark8
 
         public bool IsNumberOdd(int num)
         {
-            if (IsNumberEven % != 0)
+            if (num % 2 != 0)
             {
                 return true;
             }
@@ -52,15 +53,18 @@ namespace ChallengesWithTestsMark8
             {
                 return 0;
             }
-            else
+
+            if (numbers.Count() == 0)
             {
                 return 0;
             }
+
+            return numbers.Min() + numbers.Max();
         }
 
         public int GetLengthOfShortestString(string str1, string str2)
         {
-            if(str1.Length < str2.Length)
+            if (str1.Length < str2.Length)
             {
                 return str1.Length;
             }
@@ -72,12 +76,19 @@ namespace ChallengesWithTestsMark8
 
         public int Sum(int[] numbers)
         {
-            if(numbers == null)
+            if (numbers == null)
             {
                 return 0;
             }
 
-            return numbers.Sum();
+            var sum = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                sum += numbers[i];
+            }
+
+            return sum;
         }
 
         public int SumEvens(int[] numbers)
@@ -86,6 +97,18 @@ namespace ChallengesWithTestsMark8
             {
                 return 0;
             }
+
+            var evenSum = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] % 2 == 0)
+                {
+                    evenSum += numbers[i];
+                }
+            }
+
+            return evenSum;
         }
 
         public bool IsSumOdd(List<int> numbers)
@@ -94,11 +117,20 @@ namespace ChallengesWithTestsMark8
             {
                 return false;
             }
+
+            return (numbers.Sum() % 2 != 0);
         }
 
         public long CountOfPositiveOddsBelowNumber(long number)
         {
-            throw new NotImplementedException();
+            if (number <= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return number / 2;
+            }
         }
     }
 }

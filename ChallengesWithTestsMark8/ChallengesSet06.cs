@@ -19,15 +19,16 @@ namespace ChallengesWithTestsMark8
             {
                 word = word.ToLower();
 
-                List<string> listLowerCase = words.Select(x => x.ToLower()).ToList();
+                List<string> lc = words.Select(x => x.ToLower()).ToList();
 
-                containsWord = listLowerCase.Contains(word);
+                containsWord = lc.Contains(word);
             }
 
             if (ignoreCase == false)
             {
                 containsWord = words.Contains(word);
             }
+
             return containsWord;
         }
 
@@ -59,38 +60,38 @@ namespace ChallengesWithTestsMark8
         public int IndexOfLastUniqueLetter(string str)
         {
             int index = -1;
-            bool unidex;
+            bool uindex;
 
             for (int i = 0; i < str.Length; i++)
             {
-                unidex = true;
+                uindex = true;
 
                 for (int j = 0; j < str.Length; j++)
                 {
                     if (str[i] == str[j] && i != j)
                     {
-                        unidex = false;
+                        uindex = false;
                     }
                 }
 
-                if (unidex == true)
+                if (uindex == true)
                 {
                     index = i;
                 }
             }
-
             return index;
         }
 
         public int MaxConsecutiveCount(int[] numbers)
         {
+
             int count = 0;
 
-            for (var i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < numbers.Length; i++)
             {
                 int currentCount = 1;
 
-                for (var j = i + 1; j < numbers.Length; j++)
+                for (int j = i + 1; j < numbers.Length; j++)
                 {
                     if (numbers[i] != numbers[j])
                     {
@@ -111,19 +112,30 @@ namespace ChallengesWithTestsMark8
 
         public double[] GetEveryNthElement(List<double> elements, int n)
         {
-            var nthElement = new List<double>();
+            List<double> nthElement = new List<double>();
+            double[] nullCheck = new double[0];
 
-            if (elements == null || n <= 0 || n > elements.Count)
+            if (elements == null)
             {
-                return nthElement.ToArray();
+                return nullCheck;
             }
 
-            for (var i = n - 1; i < elements.Count; i += n)
+            for (int i = 0; i < elements.Count; i++)
             {
-                nthElement.Add(elements[i]);
+                if (elements[i] % n == 0)
+                {
+                    nthElement.Add(elements[i]);
+                }
+
+                if (n < 0 || n > elements.Count)
+                {
+                    nthElement.Clear();
+                }
             }
 
-            return nthElement.ToArray();
+            double[] finalArray = nthElement.ToArray();
+
+            return finalArray;
         }
     }
 }
